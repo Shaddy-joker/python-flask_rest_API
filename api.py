@@ -51,8 +51,9 @@ class User(Resource):
         if not user:
             abort(404, message="User not found")
         return user
-    
+    # Update user details
     @marshal_with(user_fields)
+    # Patch method to update user details
     def patch(self, id):
         args = user_args.parse_args()
         user = UserModel.query.filter_by(id=id).first()
@@ -64,6 +65,8 @@ class User(Resource):
         return user, 200
     
     @marshal_with(user_fields)
+    # Delete user
+    # Delete method to remove a user
     def delete(self, id):
         user = UserModel.query.filter_by(id=id).first()
         if not user:
